@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+
+    <!--自定义耗电排行电池View的自定义属性-->
+    <declare-styleable name="UnBindView">
+        <!-- 宝贝头像 -->
+        <attr name="baby_head_image_src" format="reference" />
+        <!-- 宝贝头像 大小-->
+        <attr name="baby_head_image_size" format="dimension" />
+        <!-- 宝贝头像 上边距-->
+        <attr name="baby_head_image_margin_top" format="dimension" />
+        <!-- 宝贝头像 左边距-->
+        <attr name="baby_head_image_margin_left" format="dimension" />
+        <!-- 宝贝头像 右边距-->
+        <attr name="baby_head_image_margin_right" format="dimension" />
+
+        <!-- 宝贝名称提示（张子馨的二维码） -->
+        <attr name="baby_name_note" format="string" />
+        <!-- 宝贝名称提示 文字颜色 -->
+        <attr name="baby_name_note_color" format="color" />
+        <!-- 宝贝名称提示 文字大小 -->
+        <attr name="baby_name_note_size" format="dimension" />
+
+        <!-- 绑定号提示（绑定号：xxxxxxxxxx） -->
+        <attr name="bind_number_note" format="string" />
+        <!-- 绑定号提示 文字颜色 -->
+        <attr name="bind_number_note_color" format="color" />
+        <!-- 绑定号提示 文字大小 -->
+        <attr name="bind_number_note_size" format="dimension" />
+
+
+        <!-- 大圆 的 半径 -->
+        <attr name="big_circular_size" format="dimension" />
+        <!-- 小圆 的 半径 -->
+        <attr name="small_circular_size" format="dimension" />
+        <!-- 小圆 与 小圆 之间的间距-->
+        <attr name="circular_margin_size" format="dimension" />
+        <!-- 大圆 与 小圆 的原点  纵坐标距离顶部的距离-->
+        <attr name="circular_center_margin_top" format="dimension" />
+
+        <!-- 二维码图片 -->
+        <attr name="qr_image_src" format="reference" />
+        <!-- 二维码图片 左上角的纵坐标距离顶部的距离-->
+        <attr name="qr_image_margin_top" format="dimension" />
+        <!-- 二维码图片大小 -->
+        <attr name="qr_image_margin_size" format="dimension" />
+
+
+        <!-- 扫码提示（扫码绑定手表） -->
+        <attr name="scan_note" format="string" />
+        <!-- 扫码提示 文字颜色 -->
+        <attr name="scan_note_color" format="color" />
+        <!-- 扫码提示 文字大小 -->
+        <attr name="scan_note_size" format="dimension" />
+        <!-- 扫码提示  纵坐标距离上面的距离-->
+        <attr name="scan_note_margin_top" format="dimension" />
+
+    </declare-styleable>
+</resources>
