@@ -6,6 +6,8 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -193,9 +195,17 @@ public class UnBindView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //将整个画布绘制成白色
-        canvas.drawColor(Color.WHITE);
-
+        //制成一个白色的圆角矩形
+        RectF backgroupRectF = new RectF(0, 0, canvas.getWidth(), canvas.getHeight());
+        Paint _paint = new Paint();
+        _paint.setColor(Color.WHITE);
+        //todo 下面的 圆角半径 到时候 放到自定义属性中
+//        public void drawRoundRect (RectF rect, float rx, float ry, Paint paint)
+//        rect：RectF对象。
+//        rx：x方向上的圆角半径。
+//        ry：y方向上的圆角半径。
+//        paint：绘制时所使用的画笔。
+        canvas.drawRoundRect(backgroupRectF, 30, 30, _paint);
     }
 
 }
