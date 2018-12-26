@@ -1,29 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#f1f1f1">
 
-    <com.oyp.view.UnBindView
-        android:id="@+id/unbindview"
+    android:background="#f1f1f1"
+    tools:context=".MainActivity">
+
+    <!--<com.oyp.view.UnBindView-->
+    <!--android:id="@+id/unbindview"-->
+    <!--android:layout_width="320dp"-->
+    <!--android:layout_height="416dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginTop="55dp"-->
+    <!--app:baby_name_note="张子萱的二维码"-->
+    <!--app:bind_number_note="绑定号：xxxxxxx"/>-->
+
+    <com.oyp.view.UnBindLinearLayout
+        android:id="@+id/layout"
         android:layout_width="320dp"
         android:layout_height="416dp"
-        android:layout_marginTop="55dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_note"
+            android:layout_width="match_parent"
+            android:layout_height="75dp">
+
+            <ImageView
+                android:id="@+id/babyHead"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/bab_head_30k" />
+
+            <TextView
+                android:id="@+id/babyNameNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:layout_toRightOf="@+id/babyHead"
+                android:text="张子馨的二维码"
+                android:textColor="#000000"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/babyNameNote"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@+id/babyHead"
+                android:text="绑定号:xydurptxcmwbdnijk"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/bab_head_30k" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="扫码绑定手表"
+            android:textColor="#888888"
+            android:textSize="15sp" />
+
+    </com.oyp.view.UnBindLinearLayout>
 
     <!--解绑按钮-->
     <TextView
         android:id="@+id/btn_baby_about_unbind"
         android:layout_width="230dp"
         android:layout_height="44dp"
-        android:layout_below="@id/unbindview"
+        android:layout_below="@id/layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="解绑"
         android:textColor="#000"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
+
 </RelativeLayout>

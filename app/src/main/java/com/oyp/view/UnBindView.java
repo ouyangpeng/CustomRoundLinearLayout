@@ -206,6 +206,16 @@ public class UnBindView extends View {
 //        ry：y方向上的圆角半径。
 //        paint：绘制时所使用的画笔。
         canvas.drawRoundRect(backgroupRectF, 30, 30, _paint);
+
+        _paint.setColor(babyNameNoteColor);
+        _paint.setTextSize(babyNameNoteSize);
+        canvas.drawText(babyNameNote,90,40,_paint);
+
+        _paint.setColor(bindNumberNoteColor);
+        _paint.setTextSize(bindNumberNoteSize);
+        canvas.drawText(bindNumberNote,90,70,_paint);
+
+
     }
 
 }
