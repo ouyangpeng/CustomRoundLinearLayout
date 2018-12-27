@@ -3,11 +3,4 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-
-    <!--解绑View 宝贝名称提示 文字颜色-->
-    <color name="unbindview_baby_name_note_color">#000000</color>
-    <!-- 解绑View 绑定号提示 文字颜色 -->
-    <color name="unbindview_bind_number_note_color">#666666</color>
-    <!-- 解绑View  扫码提示 文字颜色 -->
-    <color name="unbindview_scan_note_color">#888888</color>
 </resources>
