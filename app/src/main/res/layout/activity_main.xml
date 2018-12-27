@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
 
-    <com.oyp.view.UnBindLinearLayout
+    <com.oyp.view.CustomOypRoundLinearLayout
         android:id="@+id/layout"
         android:layout_width="320dp"
         android:layout_height="416dp"
@@ -66,5 +66,5 @@
             android:textColor="#888888"
             android:textSize="10sp" />
 
-    </com.oyp.view.UnBindLinearLayout>
+    </com.oyp.view.CustomOypRoundLinearLayout>
 </RelativeLayout>

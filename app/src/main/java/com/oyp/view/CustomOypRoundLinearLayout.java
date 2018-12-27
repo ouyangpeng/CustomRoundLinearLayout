@@ -10,8 +10,13 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-
-public class UnBindLinearLayout extends LinearLayout {
+/**
+  * 一个白色四周圆角、中间两个半圆、十几个小圆分隔的LinearLayout
+  * </p>
+  * created by OuyangPeng at 2018/12/27 下午 05:28
+  * @author OuyangPeng
+  */
+public class CustomOypRoundLinearLayout extends LinearLayout {
     /**
      * 大圆、小圆的圆心的Y坐标
      */
@@ -41,20 +46,20 @@ public class UnBindLinearLayout extends LinearLayout {
      */
     private int backgroundRadius;
 
-    public UnBindLinearLayout(Context context) {
+    public CustomOypRoundLinearLayout(Context context) {
         this(context, null);
     }
 
-    public UnBindLinearLayout(Context context, @Nullable AttributeSet attrs) {
+    public CustomOypRoundLinearLayout(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public UnBindLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CustomOypRoundLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
     }
 
     @TargetApi(21)
-    public UnBindLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomOypRoundLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         smallCircleCount = 19;
         circleStartY = SizeConvertUtil.dpTopx(context, 80);
