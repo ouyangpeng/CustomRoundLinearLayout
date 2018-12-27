@@ -91,9 +91,10 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
 
     private void initTypeArray(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomOypRoundLinearLayout);
+        //个数
+        smallCircleCount = typedArray.getInteger(R.styleable.CustomOypRoundLinearLayout_smallCircleCount,
+                getResources().getInteger(R.integer.smallCircleCount));
         //尺寸
-        smallCircleCount = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_smallCircleCount,
-                getResources().getDimensionPixelOffset(R.dimen.smallCircleCount));
         circleStartY = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_circleStartY,
                 getResources().getDimensionPixelOffset(R.dimen.circleStartY));
         smallCircleStartX = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_smallCircleStartX,
@@ -107,9 +108,9 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
         //颜色
         backgroundColor = typedArray.getColor(R.styleable.CustomOypRoundLinearLayout_backgroundColor,
                 getResources().getColor(R.color.backgroundColor));
-        smallCircleColor = typedArray.getColor(R.styleable.CustomOypRoundLinearLayout_backgroundColor,
+        smallCircleColor = typedArray.getColor(R.styleable.CustomOypRoundLinearLayout_smallCircleColor,
                 getResources().getColor(R.color.smallCircleColor));
-        bigCircleColor = typedArray.getColor(R.styleable.CustomOypRoundLinearLayout_backgroundColor,
+        bigCircleColor = typedArray.getColor(R.styleable.CustomOypRoundLinearLayout_bigCircleColor,
                 getResources().getColor(R.color.bigCircleColor));
         //回收typedArray
         typedArray.recycle();
@@ -121,7 +122,7 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
         // ==========================    第一步、绘制白色矩形
         RectF backGroundRectF = new RectF(0, 0, canvas.getWidth(), canvas.getHeight());
         Paint backGroundPaint = new Paint();
-        backGroundPaint.setColor(Color.WHITE);
+        backGroundPaint.setColor(backgroundColor);
         canvas.drawRoundRect(backGroundRectF, backgroundRadius, backgroundRadius, backGroundPaint);
 
         // ==========================    第二步、绘制2个半圆
