@@ -480,10 +480,6 @@ public class MainActivity extends AppCompatActivity {
 ☞ github.com/ouyangpeng
 ☞ oypcz@foxmail.com
 如果本文对您有所帮助，欢迎您扫码下图所示的支付宝和微信支付二维码对本文进行打赏。
---------------------- 
-作者：欧阳鹏 
-来源：CSDN 
-原文：https://blog.csdn.net/qq446282412/article/details/85295859
-版权声明：本文为博主原创文章，转载请附上博文链接！
+
 
 ![](https://img-blog.csdn.net/20170413233715262?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvb3V5YW5nX3Blbmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
