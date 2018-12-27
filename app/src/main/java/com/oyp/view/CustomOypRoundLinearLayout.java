@@ -76,21 +76,8 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
     @TargetApi(21)
     public CustomOypRoundLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        //初始化自定义属性
         initTypeArray(context, attrs);
-        smallCircleCount = 19;
-        circleStartY = SizeConvertUtil.dpTopx(context, 80);
-
-        smallCircleStartX = SizeConvertUtil.dpTopx(context, 18);
-        smallCircleRadius = SizeConvertUtil.dpTopx(context, 2);
-
-        bigCircleRadius = SizeConvertUtil.dpTopx(context, 8);
-        backgroundRadius = SizeConvertUtil.dpTopx(context, 15);
-
-        backgroundColor = Color.WHITE;
-        smallCircleColor = Color.parseColor("#dddddd");
-        bigCircleColor = Color.parseColor("#f1f1f1");
-
-
         //想要重写onDraw，就要调用setWillNotDraw（false）
         //ViewGroup默认情况下，出于性能考虑，会被设置成WILL_NOT_DROW，这样，ondraw就不会被执行了。
         // 如果我们想重写一个viewgroup的ondraw方法，有两种方法：
