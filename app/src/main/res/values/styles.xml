@@ -7,4 +7,32 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+
+    <!--自定义View的自定义属性-->
+    <declare-styleable name="CustomOypRoundLinearLayout">
+        <!-- 大圆的颜色 -->
+        <attr name="bigCircleColor" format="color" />
+        <!-- 小圆的颜色 -->
+        <attr name="smallCircleColor" format="color" />
+        <!-- 背景的背景颜色 -->
+        <attr name="backgroundColor" format="color" />
+
+
+        <!--  背景的圆角 -->
+        <attr name="backgroundRadius" format="dimension" />
+        <!--  大圆的半径 -->
+        <attr name="bigCircleRadius" format="dimension" />
+        <!--  小圆之间的间距 -->
+        <attr name="smallCircleMargin" format="dimension" />
+        <!--  小圆的半径 -->
+        <attr name="smallCircleRadius" format="dimension" />
+        <!--  小圆的个数 -->
+        <attr name="smallCircleCount" format="dimension" />
+        <!--  第一个小圆的圆心的X坐标 -->
+        <attr name="smallCircleStartX" format="dimension" />
+        <!--  大圆、小圆的圆心的Y坐标 -->
+        <attr name="circleStartY" format="dimension" />
+    </declare-styleable>
+
 </resources>

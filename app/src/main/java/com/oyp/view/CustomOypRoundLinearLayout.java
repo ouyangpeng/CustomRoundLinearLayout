@@ -2,6 +2,7 @@ package com.oyp.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,11 +12,12 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 /**
-  * 一个白色四周圆角、中间两个半圆、十几个小圆分隔的LinearLayout
-  * </p>
-  * created by OuyangPeng at 2018/12/27 下午 05:28
-  * @author OuyangPeng
-  */
+ * 一个白色四周圆角、中间两个半圆、十几个小圆分隔的LinearLayout
+ * </p>
+ * created by OuyangPeng at 2018/12/27 下午 05:28
+ *
+ * @author OuyangPeng
+ */
 public class CustomOypRoundLinearLayout extends LinearLayout {
     /**
      * 大圆、小圆的圆心的Y坐标
@@ -45,6 +47,19 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
      * 背景的圆角
      */
     private int backgroundRadius;
+    /**
+     * 背景的背景颜色
+     */
+    private int backgroundColor;
+    /**
+     * 小圆的颜色
+     */
+    private int smallCircleColor;
+    /**
+     * 大圆的颜色
+     */
+    private int bigCircleColor;
+
 
     public CustomOypRoundLinearLayout(Context context) {
         this(context, null);
@@ -61,6 +76,7 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
     @TargetApi(21)
     public CustomOypRoundLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        initTypeArray(context, attrs);
         smallCircleCount = 19;
         circleStartY = SizeConvertUtil.dpTopx(context, 80);
 
@@ -69,8 +85,13 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
 
         bigCircleRadius = SizeConvertUtil.dpTopx(context, 8);
         backgroundRadius = SizeConvertUtil.dpTopx(context, 15);
-        //想要重写onDraw，就要调用setWillNotDraw（false）
 
+        backgroundColor = Color.WHITE;
+        smallCircleColor = Color.parseColor("#dddddd");
+        bigCircleColor = Color.parseColor("#f1f1f1");
+
+
+        //想要重写onDraw，就要调用setWillNotDraw（false）
         //ViewGroup默认情况下，出于性能考虑，会被设置成WILL_NOT_DROW，这样，ondraw就不会被执行了。
         // 如果我们想重写一个viewgroup的ondraw方法，有两种方法：
         // 1，构造函数中，给viewgroup设置一个颜色。
@@ -79,6 +100,32 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
         // 相当于调用了setWillNotDraw（true），所以说，对于ViewGroup，他就认为是透明的了，
         // 如果我们想要重写onDraw，就要调用setWillNotDraw（false）
         setWillNotDraw(false);
+    }
+
+    private void initTypeArray(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomOypRoundLinearLayout);
+        //尺寸
+        smallCircleCount = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_smallCircleCount,
+                getResources().getDimensionPixelOffset(R.dimen.smallCircleCount));
+        circleStartY = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_circleStartY,
+                getResources().getDimensionPixelOffset(R.dimen.circleStartY));
+        smallCircleStartX = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_smallCircleStartX,
+                getResources().getDimensionPixelOffset(R.dimen.smallCircleStartX));
+        smallCircleRadius = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_smallCircleRadius,
+                getResources().getDimensionPixelOffset(R.dimen.smallCircleRadius));
+        bigCircleRadius = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_bigCircleRadius,
+                getResources().getDimensionPixelOffset(R.dimen.bigCircleRadius));
+        backgroundRadius = typedArray.getDimensionPixelOffset(R.styleable.CustomOypRoundLinearLayout_backgroundRadius,
+                getResources().getDimensionPixelOffset(R.dimen.backgroundRadius));
+        //颜色
+        backgroundColor = typedArray.getColor(R.styleable.CustomOypRoundLinearLayout_backgroundColor,
+                getResources().getColor(R.color.backgroundColor));
+        smallCircleColor = typedArray.getColor(R.styleable.CustomOypRoundLinearLayout_backgroundColor,
+                getResources().getColor(R.color.smallCircleColor));
+        bigCircleColor = typedArray.getColor(R.styleable.CustomOypRoundLinearLayout_backgroundColor,
+                getResources().getColor(R.color.bigCircleColor));
+        //回收typedArray
+        typedArray.recycle();
     }
 
     @Override
@@ -93,7 +140,7 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
         // ==========================    第二步、绘制2个半圆
         Paint circlePaint = new Paint();
         circlePaint.setStyle(Paint.Style.FILL);
-        circlePaint.setColor(Color.parseColor("#f1f1f1"));
+        circlePaint.setColor(bigCircleColor);
         // 圆弧的外轮廓矩形区域
         RectF leftOval = new RectF(-bigCircleRadius, circleStartY - bigCircleRadius,
                 bigCircleRadius, circleStartY + bigCircleRadius);
@@ -116,7 +163,7 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
         // ==========================    第三步、绘制19个小圆  作为分隔线
         // 最后一个小圆和第一个小圆之间 有18段分隔空白
         smallCircleMargin = ((canvas.getWidth() - smallCircleStartX) - (smallCircleStartX)) / (smallCircleCount - 1);
-        circlePaint.setColor(Color.parseColor("#dddddd"));
+        circlePaint.setColor(smallCircleColor);
         for (int i = 0; i < smallCircleCount; i++) {
             canvas.drawCircle(smallCircleStartX + i * smallCircleMargin, circleStartY, smallCircleRadius, circlePaint);
         }

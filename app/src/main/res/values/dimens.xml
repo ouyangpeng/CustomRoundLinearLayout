@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="smallCircleCount">19dp</dimen>
+    <dimen name="circleStartY">80dp</dimen>
+    <dimen name="smallCircleStartX">18dp</dimen>
+    <dimen name="smallCircleRadius">2dp</dimen>
+    <dimen name="bigCircleRadius">8dp</dimen>
+    <dimen name="backgroundRadius">15dp</dimen>
+</resources>
