@@ -113,8 +113,8 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
                 getWidth() + bigCircleRadius, circleStartY + bigCircleRadius);
         canvas.drawArc(rightOval, 90, 180, true, circlePaint);
 
-        // ==========================    第三步、绘制18个小圆  作为分隔线
-        // 最后一个小圆和第一个小圆之间 有17段分隔空白
+        // ==========================    第三步、绘制19个小圆  作为分隔线
+        // 最后一个小圆和第一个小圆之间 有18段分隔空白
         smallCircleMargin = ((canvas.getWidth() - smallCircleStartX) - (smallCircleStartX)) / (smallCircleCount - 1);
         circlePaint.setColor(Color.parseColor("#dddddd"));
         for (int i = 0; i < smallCircleCount; i++) {

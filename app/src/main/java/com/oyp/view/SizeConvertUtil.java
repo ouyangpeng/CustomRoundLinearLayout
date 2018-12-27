@@ -3,9 +3,10 @@ package com.oyp.view;
 import android.content.Context;
 
 /**
- * 尺寸转换工具
- * <p>
- * Created by lhd on 2015/9/21.
+ *  尺寸转换工具
+ * </p>
+ * created by OuyangPeng at 2018/12/27 下午 06:38
+ * @author OuyangPeng
  */
 public class SizeConvertUtil {
     public static int dpTopx(Context context, float dp) {

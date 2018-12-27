@@ -6,7 +6,6 @@
     android:background="#f1f1f1"
     tools:context=".MainActivity">
 
-
     <com.oyp.view.CustomOypRoundLinearLayout
         android:id="@+id/layout"
         android:layout_width="320dp"
@@ -65,6 +64,5 @@
             android:text="一个人，如果你不逼自己一把，你根本不知道自己有多优秀！"
             android:textColor="#888888"
             android:textSize="10sp" />
-
     </com.oyp.view.CustomOypRoundLinearLayout>
 </RelativeLayout>
