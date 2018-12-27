@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+
 public class UnBindLinearLayout extends LinearLayout {
     /**
      * 大圆、小圆的圆心的Y坐标
@@ -35,6 +36,10 @@ public class UnBindLinearLayout extends LinearLayout {
      * 大圆的半径
      */
     private int bigCircleRadius;
+    /**
+     * 背景的圆角
+     */
+    private int backgroundRadius;
 
     public UnBindLinearLayout(Context context) {
         this(context, null);
@@ -58,6 +63,7 @@ public class UnBindLinearLayout extends LinearLayout {
         smallCircleRadius = SizeConvertUtil.dpTopx(context, 2);
 
         bigCircleRadius = SizeConvertUtil.dpTopx(context, 8);
+        backgroundRadius = SizeConvertUtil.dpTopx(context, 15);
 
         setWillNotDraw(false);//设置调用onDraw方法
     }
@@ -71,7 +77,7 @@ public class UnBindLinearLayout extends LinearLayout {
         RectF backGroundRectF = new RectF(0, 0, canvas.getWidth(), canvas.getHeight());
         Paint backGroundPaint = new Paint();
         backGroundPaint.setColor(Color.WHITE);
-        canvas.drawRoundRect(backGroundRectF, 30, 30, backGroundPaint);
+        canvas.drawRoundRect(backGroundRectF, backgroundRadius, backgroundRadius, backGroundPaint);
 
         // ==========================    第二步、绘制2个半圆
         Paint circlePaint = new Paint();
