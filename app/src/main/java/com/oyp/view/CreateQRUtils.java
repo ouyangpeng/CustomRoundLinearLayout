@@ -378,4 +378,50 @@ public class CreateQRUtils {
         }
         return bitmap;
     }
+
+
+    /**
+     * 生成圆点二维码
+     *
+     * @param content  二维码内容
+     * @param size     二维码大小
+     * @return 圆点二维码
+     */
+    public static Bitmap createDotQRCode(String content, int size) {
+        try {
+            // 生成一维条码,编码时指定大小,不要生成了图片以后再进行缩放,这样会模糊导致识别失败
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            hints.put(EncodeHintType.MARGIN, 0);
+            BitMatrix matrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, size, size, hints);
+
+            Rect codeRect = new Rect();
+            int cellWidth = checkParam(matrix, codeRect);
+
+            int width = matrix.getWidth();
+            int height = matrix.getHeight();
+
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setAntiAlias(true);
+            int hcellWidth = cellWidth / 2;
+            int startXp = codeRect.left + hcellWidth;
+            int startYp = codeRect.top + hcellWidth;
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            for (int x = startXp; x <= codeRect.right; x += cellWidth) {
+                for (int y = startYp; y <= codeRect.bottom; y += cellWidth) {
+                    if (matrix.get(x, y)) {
+                        canvas.drawCircle(x, y, hcellWidth, paint);
+                    }
+                }
+            }
+            return bitmap;
+        } catch (Exception e) {
+            Log.e(TAG, Log.getStackTraceString(e));
+        }
+        return null;
+    }
 }

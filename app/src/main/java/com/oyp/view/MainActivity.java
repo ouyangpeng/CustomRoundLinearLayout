@@ -17,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
         String qrContent = getString(R.string.blog);
         //生成普通二维码
 //        Bitmap bitmap = CreateQRUtils.createNormalQRCode(qrContent,SizeConvertUtil.dpTopx(this, 240));
+        //生成 圆点二维码
+        Bitmap bitmap = CreateQRUtils.createDotQRCode(qrContent,SizeConvertUtil.dpTopx(this, 240));
         // 生成液态二维码
-        Bitmap bitmap = CreateQRUtils.createQRCodeSmooth(qrContent,SizeConvertUtil.dpTopx(this, 240),1.0f);
+//        Bitmap bitmap = CreateQRUtils.createQRCodeSmooth(qrContent,SizeConvertUtil.dpTopx(this, 240),1.0f);
         //logo图片
 //        Bitmap headBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.oyp);
         //附加icon
