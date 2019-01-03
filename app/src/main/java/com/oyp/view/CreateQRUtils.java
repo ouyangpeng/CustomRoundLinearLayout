@@ -427,11 +427,11 @@ public class CreateQRUtils {
 
 
     /**
-     * 图像二维码
+     * 生成图像二维码
      *
-     * @param content
-     * @param size
-     * @return
+     * @param content 二维码内容
+     * @param size    二维码大小
+     * @return 图像二维码
      */
     public static Bitmap createQRCodeBitmap(String content, int size, Bitmap[] bitmaps, Bitmap bitmapKey) {
         if (bitmaps == null || bitmaps.length == 0) {
@@ -488,4 +488,199 @@ public class CreateQRUtils {
         }
         return null;
     }
+
+
+
+    /**
+     * 随机大小的圆点
+     * 定位区不可随机大小
+     *
+     * @param content
+     * @param size
+     * @return
+     */
+
+    /**
+     * 生成 随机大小的圆点 二维码
+     * 定位区不可随机大小
+     *
+     * @param content 二维码内容
+     * @param size    二维码大小
+     * @return 随机大小的圆点二维码
+     */
+    public static Bitmap createRandomDotQRCode(String content, int size) {
+        try {
+            // 生成一维条码,编码时指定大小,不要生成了图片以后再进行缩放,这样会模糊导致识别失败
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            hints.put(EncodeHintType.MARGIN, 0);
+            BitMatrix matrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, size, size, hints);
+
+            Rect codeRect = new Rect();
+            int cellWidth = checkParam(matrix, codeRect);
+
+            int width = matrix.getWidth();
+            int height = matrix.getHeight();
+
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setAntiAlias(true);
+            int pw = 7 * cellWidth;
+            int hcellWidth = cellWidth / 2;
+            int startXp = codeRect.left + hcellWidth;
+            int startYp = codeRect.top + hcellWidth;
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            for (int x = startXp; x <= codeRect.right; x += cellWidth) {
+                for (int y = startYp; y <= codeRect.bottom; y += cellWidth) {
+                    if (matrix.get(x, y)) {
+                        int r = hcellWidth;
+                        if ((x > codeRect.left + pw || y > codeRect.top + pw) && (x < codeRect.right - pw || y > codeRect.top + pw) && (x > codeRect.left + pw || y < codeRect.bottom - pw)) {
+                            r = (int) ((0.75f + Math.random() * 0.5f) * hcellWidth);
+                        }
+                        canvas.drawCircle(x, y, r, paint);
+                    }
+                }
+            }
+            return bitmap;
+        } catch (Exception e) {
+            Log.e(TAG, Log.getStackTraceString(e));
+        }
+        return null;
+    }
+
+
+    /**
+     * 多边形二维码
+     *
+     * @param content 二维码内容
+     * @param size    二维码大小
+     * @return 多边形二维码
+     */
+    public static Bitmap createPolygonQRCode(String content, int size, int lCount) {
+        if (lCount < 3) {
+            lCount = 3;
+        }
+        try {
+
+            // 生成一维条码,编码时指定大小,不要生成了图片以后再进行缩放,这样会模糊导致识别失败
+
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            hints.put(EncodeHintType.MARGIN, 0);
+            BitMatrix matrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, size, size, hints);
+
+            Rect codeRect = new Rect();
+            int cellWidth = checkParam(matrix, codeRect);
+
+            int width = matrix.getWidth();
+            int height = matrix.getHeight();
+
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setAntiAlias(true);
+            int hcellWidth = cellWidth / 2;
+            int startXp = codeRect.left + hcellWidth;
+            int startYp = codeRect.top + hcellWidth;
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            double pr = 2 * Math.PI / lCount;
+            double pr90 = 2 * Math.PI / 4;
+            Canvas canvas = new Canvas(bitmap);
+            int pw = 7 * cellWidth;
+            for (int x = startXp; x <= codeRect.right; x += cellWidth) {
+                for (int y = startYp; y <= codeRect.bottom; y += cellWidth) {
+                    if (matrix.get(x, y)) {
+                        if ((x > codeRect.left + pw || y > codeRect.top + pw) && (x < codeRect.right - pw || y > codeRect.top + pw) && (x > codeRect.left + pw || y < codeRect.bottom - pw)) {
+
+                            Path path = new Path();
+                            path.moveTo(x, y - hcellWidth);
+                            for (int indexL = 1; indexL < lCount; indexL++) {
+                                path.lineTo((int) (x + Math.cos(indexL * pr - pr90) * hcellWidth), (int) (y + Math.sin(indexL * pr - pr90) * hcellWidth));
+                            }
+                            path.close();
+                            canvas.drawPath(path, paint);
+                        } else {
+                            canvas.drawRect(x - hcellWidth, y - hcellWidth, x + hcellWidth, y + hcellWidth, paint);
+                        }
+                    }
+                }
+            }
+            return bitmap;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+    /**
+     * n角星二维码
+     *
+     * @param content
+     * @param size
+     * @return
+     */
+    public static Bitmap createStarQRCode(String content, int size, int lCount) {
+        if (lCount < 3) {
+            lCount = 3;
+        }
+        try {
+
+            // 生成一维条码,编码时指定大小,不要生成了图片以后再进行缩放,这样会模糊导致识别失败
+
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            hints.put(EncodeHintType.MARGIN, 0);
+            BitMatrix matrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, size, size, hints);
+
+            Rect codeRect = new Rect();
+            int cellWidth = checkParam(matrix, codeRect);
+
+            int width = matrix.getWidth();
+            int height = matrix.getHeight();
+
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setAntiAlias(true);
+            int hcellWidth = cellWidth / 2;
+            int hcellWidth2 = cellWidth / 4;
+            int startXp = codeRect.left + hcellWidth;
+            int startYp = codeRect.top + hcellWidth;
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            double pr = 2 * Math.PI / lCount;
+            double pr90 = 2 * Math.PI / 4;
+            double pr45 = 2 * Math.PI / 8;
+            Canvas canvas = new Canvas(bitmap);
+            int pw = 7 * cellWidth;
+            for (int x = startXp; x <= codeRect.right; x += cellWidth) {
+                for (int y = startYp; y <= codeRect.bottom; y += cellWidth) {
+                    if (matrix.get(x, y)) {
+                        if ((x > codeRect.left + pw || y > codeRect.top + pw) && (x < codeRect.right - pw || y > codeRect.top + pw) && (x > codeRect.left + pw || y < codeRect.bottom - pw)) {
+
+                            Path path = new Path();
+                            path.moveTo(x, y - hcellWidth);
+                            path.lineTo((int) (x + Math.cos(-pr45) * hcellWidth2), (int) (y + Math.sin(-pr45) * hcellWidth2));
+                            for (int indexL = 1; indexL < lCount; indexL++) {
+                                path.lineTo((int) (x + Math.cos(indexL * pr - pr90) * hcellWidth), (int) (y + Math.sin(indexL * pr - pr90) * hcellWidth));
+                                path.lineTo((int) (x + Math.cos(indexL * pr - pr45) * hcellWidth2), (int) (y + Math.sin(indexL * pr - pr45) * hcellWidth2));
+                            }
+                            path.close();
+                            canvas.drawPath(path, paint);
+                        } else {
+                            canvas.drawRect(x - hcellWidth, y - hcellWidth, x + hcellWidth, y + hcellWidth, paint);
+                        }
+                    }
+                }
+            }
+            return bitmap;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
 }
