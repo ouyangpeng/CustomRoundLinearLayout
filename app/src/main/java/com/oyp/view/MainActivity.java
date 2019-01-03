@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
         // 生成液态二维码
         Bitmap bitmap = CreateQRUtils.createQRCodeSmooth(qrContent,SizeConvertUtil.dpTopx(this, 240),1.0f);
         //logo图片
-        Bitmap headBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.oyp);
+//        Bitmap headBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.oyp);
         //附加icon
-        bitmap = CreateQRUtils.withLogo(bitmap,headBitmap,0.2f);
+//        bitmap = CreateQRUtils.withLogo(bitmap,headBitmap,0.2f);
         qrCodeImageView.setImageBitmap(bitmap);
     }
 }
