@@ -49,12 +49,13 @@
                 android:layout_below="@id/babyNameNote"
                 android:layout_marginTop="4dp"
                 android:layout_toRightOf="@+id/babyHead"
-                android:text="https://blog.csdn.net/ouyang_peng/"
+                android:text="@string/blog"
                 android:textColor="#666666"
                 android:textSize="14sp" />
         </RelativeLayout>
 
         <ImageView
+            android:id="@+id/qrCode"
             android:layout_width="240dp"
             android:layout_height="240dp"
             android:layout_gravity="center_horizontal"
