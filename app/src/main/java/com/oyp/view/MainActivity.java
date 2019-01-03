@@ -1,6 +1,7 @@
 package com.oyp.view;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -16,7 +17,10 @@ public class MainActivity extends AppCompatActivity {
         String qrContent = getString(R.string.blog);
         //生成普通二维码
         Bitmap bitmap = CreateQRUtils.createNormalQRCode(qrContent,SizeConvertUtil.dpTopx(this, 240));
-
+        //logo图片
+        Bitmap headBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.oyp);
+        //附加icon
+        bitmap = CreateQRUtils.withLogo(bitmap,headBitmap,0.2f);
         qrCodeImageView.setImageBitmap(bitmap);
     }
 }
