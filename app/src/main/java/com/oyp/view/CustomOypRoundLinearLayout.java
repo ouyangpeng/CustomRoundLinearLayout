@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
@@ -61,6 +60,13 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
     private int bigCircleColor;
 
 
+    private RectF backGroundRectF;
+    private Paint backGroundPaint;
+    private Paint circlePaint;
+
+    private RectF leftOval;
+    private RectF rightOval;
+
     public CustomOypRoundLinearLayout(Context context) {
         this(context, null);
     }
@@ -92,6 +98,20 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
         // 相当于调用了setWillNotDraw（true），所以说，对于ViewGroup，他就认为是透明的了，
         // 如果我们想要重写onDraw，就要调用setWillNotDraw（false）
         setWillNotDraw(false);
+
+
+        backGroundRectF = new RectF();
+
+        backGroundPaint = new Paint();
+        backGroundPaint.setColor(backgroundColor);
+
+        circlePaint = new Paint();
+        circlePaint.setStyle(Paint.Style.FILL);
+        circlePaint.setColor(bigCircleColor);
+
+        leftOval = new RectF();
+        rightOval = new RectF();
+
     }
 
     private void initTypeArray(Context context, AttributeSet attrs) {
@@ -125,17 +145,13 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
     protected void onDraw(Canvas canvas) {
         //制成一个白色的圆角矩形  作为背景  画2个半圆 和 18个小圆  作为分隔线
         // ==========================    第一步、绘制白色矩形
-        RectF backGroundRectF = new RectF(0, 0, canvas.getWidth(), canvas.getHeight());
-        Paint backGroundPaint = new Paint();
-        backGroundPaint.setColor(backgroundColor);
+        backGroundRectF.set(0, 0, getWidth(), getHeight());
         canvas.drawRoundRect(backGroundRectF, backgroundRadius, backgroundRadius, backGroundPaint);
 
         // ==========================    第二步、绘制2个半圆
-        Paint circlePaint = new Paint();
-        circlePaint.setStyle(Paint.Style.FILL);
-        circlePaint.setColor(bigCircleColor);
+
         // 圆弧的外轮廓矩形区域
-        RectF leftOval = new RectF(-bigCircleRadius, circleStartY - bigCircleRadius,
+        leftOval.set(-bigCircleRadius, circleStartY - bigCircleRadius,
                 bigCircleRadius, circleStartY + bigCircleRadius);
         /*
          * drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint)
@@ -149,13 +165,13 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
         canvas.drawArc(leftOval, -90, 180, true, circlePaint);
 
         //右边的半圆
-        RectF rightOval = new RectF(canvas.getWidth() - bigCircleRadius, circleStartY - bigCircleRadius,
+        rightOval.set(getWidth() - bigCircleRadius, circleStartY - bigCircleRadius,
                 getWidth() + bigCircleRadius, circleStartY + bigCircleRadius);
         canvas.drawArc(rightOval, 90, 180, true, circlePaint);
 
         // ==========================    第三步、绘制19个小圆  作为分隔线
         // 最后一个小圆和第一个小圆之间 有18段分隔空白
-        smallCircleMargin = ((canvas.getWidth() - smallCircleStartX) - (smallCircleStartX)) / (smallCircleCount - 1);
+        smallCircleMargin = ((getWidth() - smallCircleStartX) - (smallCircleStartX)) / (smallCircleCount - 1);
         circlePaint.setColor(smallCircleColor);
         for (int i = 0; i < smallCircleCount; i++) {
             canvas.drawCircle(smallCircleStartX + i * smallCircleMargin, circleStartY, smallCircleRadius, circlePaint);
