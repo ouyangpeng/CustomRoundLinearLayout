@@ -70,12 +70,17 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
     }
 
     public CustomOypRoundLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        init(context, attrs);
     }
 
     @TargetApi(21)
     public CustomOypRoundLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init(context, attrs);
+    }
+
+    private void init(Context context, @Nullable AttributeSet attrs) {
         //初始化自定义属性
         initTypeArray(context, attrs);
         //想要重写onDraw，就要调用setWillNotDraw（false）
