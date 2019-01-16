@@ -107,7 +107,6 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
 
         circlePaint = new Paint();
         circlePaint.setStyle(Paint.Style.FILL);
-        circlePaint.setColor(bigCircleColor);
 
         leftOval = new RectF();
         rightOval = new RectF();
@@ -150,6 +149,7 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
 
         // ==========================    第二步、绘制2个半圆
 
+        circlePaint.setColor(bigCircleColor);
         // 圆弧的外轮廓矩形区域
         leftOval.set(-bigCircleRadius, circleStartY - bigCircleRadius,
                 bigCircleRadius, circleStartY + bigCircleRadius);
