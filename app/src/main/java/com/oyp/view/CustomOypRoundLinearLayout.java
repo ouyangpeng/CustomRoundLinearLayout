@@ -180,12 +180,12 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
 
     private void drawBackGroundAndSmallCircle(Canvas canvas) {
         // ========================== 绘制白色矩形
-        backGroundRectF.set(0, 0, getWidth(), getHeight());
+        backGroundRectF.set(0, 0, mWidth, mHeight);
         canvas.drawRoundRect(backGroundRectF, backgroundRadius, backgroundRadius, backGroundPaint);
 
         // ==========================  绘制19个小圆  作为分隔线
         // 最后一个小圆和第一个小圆之间 有18段分隔空白
-        smallCircleMargin = ((getWidth() - smallCircleStartX) - (smallCircleStartX)) / (smallCircleCount - 1);
+        smallCircleMargin = ((mWidth - smallCircleStartX) - (smallCircleStartX)) / (smallCircleCount - 1);
         circlePaint.setColor(smallCircleColor);
         for (int i = 0; i < smallCircleCount; i++) {
             canvas.drawCircle(smallCircleStartX + i * smallCircleMargin, circleStartY, smallCircleRadius, circlePaint);
@@ -208,8 +208,8 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
         canvas.drawArc(leftOval, -90, 180, true, circlePaint);
 
         //右边的半圆
-        rightOval.set(getWidth() - bigCircleRadius, circleStartY - bigCircleRadius,
-                getWidth() + bigCircleRadius, circleStartY + bigCircleRadius);
+        rightOval.set(mWidth - bigCircleRadius, circleStartY - bigCircleRadius,
+                mWidth + bigCircleRadius, circleStartY + bigCircleRadius);
         canvas.drawArc(rightOval, 90, 180, true, circlePaint);
     }
 }
