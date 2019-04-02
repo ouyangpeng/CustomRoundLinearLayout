@@ -786,7 +786,7 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
 ![](https://img-blog.csdn.net/20150708201910089)
 
 >作者：欧阳鹏 欢迎转载，与人分享是进步的源泉！
-转载请保留原文地址：https://blog.csdn.net/qq446282412/article/details/85209203
+转载请保留原文地址：https://blog.csdn.net/ouyang_peng/article/details/85295859
 ☞ 本人QQ: 3024665621
 ☞ QQ交流群: 123133153
 ☞ github.com/ouyangpeng
