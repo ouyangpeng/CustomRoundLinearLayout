@@ -114,6 +114,13 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
     }
 
     private void initXfermode() {
+        //禁用硬件加速   https://www.jianshu.com/p/78c36742d50f
+        //从硬件加速不支持的函数列表中，我们可以看到AvoidXfermode，PixelXorXfermode是完全不支持的，而PorterDuffXfermode是部分不支持的。
+        //如果你的APP跑在API 14版本以后，而你洽好要用那些不支持硬件加速的函数要怎么办？ 那就只好禁用硬件加速喽
+
+        //该方法千万别放到onDraw()方法里面调用，否则会不停的重绘的，因为该方法调用了invalidate() 方法
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
         mXfermode = new PorterDuffXfermode(PorterDuff.Mode.XOR);
     }
 
@@ -159,8 +166,7 @@ public class CustomOypRoundLinearLayout extends LinearLayout {
     protected void onDraw(Canvas canvas) {
         //制成一个白色的圆角矩形  作为背景  画2个半圆 和 18个小圆  作为分隔线
         initWidthAndHeight();
-        //禁用硬件加速
-        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
         //使用离屏绘制  存为新图层
         int layerID = canvas.saveLayer(0, 0, mWidth, mHeight, backGroundPaint, Canvas.ALL_SAVE_FLAG);
 
